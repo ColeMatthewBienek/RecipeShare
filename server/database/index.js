@@ -1,8 +1,8 @@
 const mongoose = require("mongoose");
 require("dotenv").config();
+// eslint-disable-next-line node/no-unpublished-require
 const { DB_CONNECTION } = require("../../config");
 
-console.log(DB_CONNECTION);
 // `${process.env.MONGO_DB_CONNECTION}`
 const mongoDB = DB_CONNECTION;
 
