@@ -1,20 +1,11 @@
-import React from 'react';
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link
-} from 'react-router-dom';
-
-// export default function App() {
-//   return(
-//     <h1>react-app-template</h1>
-//   )
-// };
+import React from "react";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import Button from "@mui/material/Button";
 
 const App = () => (
-  <h1>react-app-template</h1>
+  <h1>
+    <Button variant="contained">Contained</Button>
+  </h1>
 );
 
 export default App;
-
