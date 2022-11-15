@@ -13,7 +13,7 @@ const CookModel = mongoose.model("Cook", cookSchema);
 
 // Recipes
 const recipeSchema = new Schema({
-  recipe_name: String,
+  recipe_name: { type: String, required: true, unique: true },
   cook_name: { type: String, required: true },
   ingredients: [
     {

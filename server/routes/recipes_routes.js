@@ -6,7 +6,7 @@ const router = new Router();
 module.exports = router;
 
 router.get("/recipes", async (req, res) => {
-  const recipeList = await RecipeModel.getRecipes;
+  const recipeList = await RecipeModel.find({});
   res.status(200).send(recipeList);
 });
 
@@ -17,6 +17,7 @@ router.post("/recipe", async (req, res) => {
     res.status(201).send();
   } catch (err) {
     console.log(err);
+    res.status(501).send("dup err");
   }
 });
 
@@ -26,6 +27,7 @@ router.post("/cook", async (req, res) => {
     await CookModel.create(payload);
     res.status(201).send();
   } catch (error) {
+    res.status(501).send("dup err");
     console.log(error);
   }
 });
