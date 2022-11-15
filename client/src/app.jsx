@@ -1,11 +1,10 @@
 import React from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import Button from "@mui/material/Button";
+import Home from "./components/home";
 
-const App = () => (
-  <h1>
-    <Button variant="contained">Contained</Button>
-  </h1>
-);
+const App = () => {
+  return <Home />;
+};
 
 export default App;
