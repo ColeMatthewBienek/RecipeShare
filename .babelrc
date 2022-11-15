@@ -1,0 +1,12 @@
+// The babel loader will use all the presets in this file. The presets contain rules for parsing different
+// versions of JS down to ES5
+
+{
+  "presets": [
+    // rules for transpiling current version of JS down to ES5
+    "@babel/preset-env",
+
+    // rules for transpiling react JSX files to ES5
+    "@babel/preset-react"
+  ]
+}
