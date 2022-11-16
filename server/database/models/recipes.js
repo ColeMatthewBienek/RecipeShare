@@ -6,6 +6,7 @@ const db = require("../index");
 // schemas and models
 const cookSchema = new Schema({
   cookName: { type: String, required: true, unique: true },
+  photos: [String],
   location: String,
   foodTypes: [String],
 });
