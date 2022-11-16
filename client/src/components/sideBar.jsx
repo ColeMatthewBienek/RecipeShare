@@ -26,7 +26,6 @@ const drawerWidth = 240;
 
 export default function Sidebar({ editRecipeModal, setEditRecipeModal }) {
   const handleMenuClick = (event) => {
-    alert("Clicked!");
     const menuVal = event.currentTarget.getAttribute("value");
     if (menuVal === "Add Recipe") {
       setEditRecipeModal(true);
