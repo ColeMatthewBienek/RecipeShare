@@ -13,18 +13,26 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import StarBorderPurple500Icon from "@mui/icons-material/StarBorderPurple500";
 import ChatBubbleOutlineIcon from "@mui/icons-material/ChatBubbleOutline";
-import DraftsIcon from "@mui/icons-material/Drafts";
+import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import CommentIcon from "@mui/icons-material/Comment";
 
 const sideBarElements = [
   { text: "Favorites", icon: <StarBorderPurple500Icon /> },
   { text: "My Comments", icon: <CommentIcon /> },
   { text: "Message", icon: <ChatBubbleOutlineIcon /> },
-  { text: "Drafts", icon: <DraftsIcon /> },
+  { text: "Add Recipe", icon: <AddCircleOutlineIcon /> },
 ];
 const drawerWidth = 240;
 
-export default function Sidebar() {
+export default function Sidebar({ editRecipeModal, setEditRecipeModal }) {
+  const handleMenuClick = (event) => {
+    alert("Clicked!");
+    const menuVal = event.currentTarget.getAttribute("value");
+    if (menuVal === "Add Recipe") {
+      setEditRecipeModal(true);
+    }
+  };
+
   return (
     <Box sx={{ display: "flex" }}>
       <Drawer
@@ -44,7 +52,11 @@ export default function Sidebar() {
         <List>
           {sideBarElements.map((element, index) => (
             <ListItem key={element.text} disablePadding>
-              <ListItemButton>
+              <ListItemButton
+                id={element.text}
+                value={element.text}
+                onClick={handleMenuClick}
+              >
                 <ListItemIcon>{element.icon}</ListItemIcon>
                 <ListItemText primary={element.text} />
               </ListItemButton>
