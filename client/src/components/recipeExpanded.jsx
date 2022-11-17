@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useRecipeContext } from "../context.jsx";
 import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
@@ -18,37 +18,35 @@ import Stack from "@mui/material/Stack";
 import StarRateIcon from "@mui/icons-material/StarRate";
 
 const style = {
-  position: "absolute",
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
   width: 600,
   bgcolor: "background.paper",
   border: "2px solid #000",
   borderRadius: "6px",
   boxShadow: 24,
   p: 4,
+  marginTop: "150px",
 };
 
 export default function RecipeExpandedd({ setPage, recipeId }) {
   const { loading, recipes, cooks } = useRecipesContext();
-  console.log("r_id", recipeId);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   const recipe =
     !loading && recipes
       ? recipes.filter((recipe) => recipe._id === recipeId)
       : [];
 
-  console.log("recipe", recipe);
-  console.log(recipes);
-
   return (
-    <Box sx={style}>
+    <Container sx={style}>
       <Grid container spacing={2}>
         <Grid item xs={12}>
           ★★★★★
         </Grid>
         <Grid item xs={8}>
-          <Typography display="block" variant="h3">
+          <Typography autoFocus display="block" variant="h3">
             {recipe[0].recipe_name}
           </Typography>
           <Typography display="block" variant="body1">
@@ -111,6 +109,6 @@ export default function RecipeExpandedd({ setPage, recipeId }) {
           </Button>
         </Grid>
       </Grid>
-    </Box>
+    </Container>
   );
 }

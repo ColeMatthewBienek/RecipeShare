@@ -16,6 +16,8 @@ import { Grid, Item } from "@mui/material";
 import TextField from "@mui/material/TextField";
 import UploadWidget from "./uploadWidget.jsx";
 import { CLOUD_NAME, UPLOAD_PRESET } from "../../../config";
+import Select from "@mui/material/Select";
+import MenuItem from "@mui/material/MenuItem";
 
 const initialRecipeValues = {
   recipe_name: "",
@@ -63,9 +65,7 @@ const EditRecipes = ({ editRecipeModal, setEditRecipeModal, setPage }) => {
       },
       function (err, result) {
         if (!err && result.info && result.event === "success") {
-          console.log(result.info.url);
           const photoToAdd = result.info.url;
-          console.log(values.photos);
           setValues({
             ...values,
             photos: [...values.photos, photoToAdd],

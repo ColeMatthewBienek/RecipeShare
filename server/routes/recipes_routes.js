@@ -1,3 +1,4 @@
+/* eslint-disable prefer-destructuring */
 const Router = require("express-promise-router");
 const { CookModel, RecipeModel } = require("../database/models/recipes");
 const db = require("../database/index");
@@ -36,6 +37,26 @@ router.get("/cooks", async (req, res) => {
   try {
     const cooksList = await CookModel.find({});
     res.status(200).json(cooksList);
+  } catch (err) {
+    console.log(err);
+  }
+});
+
+router.post("/comment", async (req, res) => {
+  // use objectId to locate recipe and add comment
+  const searchId = req.body.recipeId;
+  const comment = req.body.comment;
+  const name = req.body.commentor;
+  const newComment = {
+    comment: comment,
+    commentor: name,
+  };
+  try {
+    await RecipeModel.findOneAndUpdate(
+      { _id: searchId },
+      { $push: { comments: newComment } }
+    );
+    res.status(201).send("comment posted");
   } catch (err) {
     console.log(err);
   }
