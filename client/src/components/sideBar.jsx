@@ -24,11 +24,16 @@ const sideBarElements = [
 ];
 const drawerWidth = 240;
 
-export default function Sidebar({ editRecipeModal, setEditRecipeModal }) {
+export default function Sidebar({
+  editRecipeModal,
+  setEditRecipeModal,
+  setPage,
+}) {
   const handleMenuClick = (event) => {
     const menuVal = event.currentTarget.getAttribute("value");
     if (menuVal === "Add Recipe") {
       setEditRecipeModal(true);
+      setPage("modal");
     }
   };
 

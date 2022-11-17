@@ -20,23 +20,26 @@ const darkTheme = createTheme({
 
 const App = () => {
   const { loading, cooks, recipes, state } = useRecipesContext();
-  console.log("state", state);
   const [editRecipeModal, setEditRecipeModal] = useState(false);
+  const [page, setPage] = useState("home");
 
   const [light, setLight] = useState(true);
   return (
     <ThemeProvider theme={darkTheme}>
       <CssBaseline />
       <HeadingNavBar />
-      {editRecipeModal ? (
+      {page === "modal" && (
         <EditRecipes
+          setPage={setPage}
           editRecipeModal={editRecipeModal}
           setEditRecipeModal={setEditRecipeModal}
         />
-      ) : (
+      )}
+      {page === "home" && (
         <Home
           editRecipeModal={editRecipeModal}
           setEditRecipeModal={setEditRecipeModal}
+          setPage={setPage}
         />
       )}
     </ThemeProvider>

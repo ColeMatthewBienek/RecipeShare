@@ -43,7 +43,7 @@ const directionValues = {
   item: [],
 };
 
-const EditRecipes = ({ editRecipeModal, setEditRecipeModal }) => {
+const EditRecipes = ({ editRecipeModal, setEditRecipeModal, setPage }) => {
   const [values, setValues] = useState(initialRecipeValues);
   const [ingredVal, setIngredVal] = useState(ingredientValues);
   const { recipes, cooks, state, setState, loading } = useRecipesContext();
@@ -76,6 +76,7 @@ const EditRecipes = ({ editRecipeModal, setEditRecipeModal }) => {
 
   const handleClose = () => {
     setEditRecipeModal(false);
+    setPage("home");
   };
   const handleChange = (event) => {
     const elementName = event.target.name;

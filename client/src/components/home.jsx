@@ -11,7 +11,7 @@ import { useRecipesContext } from "../context.jsx";
 import CookCard from "./cookCard.jsx";
 import EditRecipes from "./editRecipe.jsx";
 
-const Home = ({ editRecipeModal, setEditRecipeModal }) => {
+const Home = ({ editRecipeModal, setEditRecipeModal, setPage }) => {
   const { loading, cooks, recipes, state } = useRecipesContext();
   return (
     <div style={{ marginTop: "100px", maxWidth: "800px", marginLeft: "125px" }}>
@@ -20,6 +20,7 @@ const Home = ({ editRecipeModal, setEditRecipeModal }) => {
           <Grid container spacing={2}>
             <Grid item xs={3}>
               <Sidebar
+                setPage={setPage}
                 editRecipeModal={editRecipeModal}
                 setEditRecipeModal={setEditRecipeModal}
               />
