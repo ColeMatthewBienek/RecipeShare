@@ -35,7 +35,7 @@ const initialRecipeValues = {
 
 const ingredientValues = {
   ingredient: "",
-  amount: 0,
+  amount: "",
   measure: "",
 };
 
@@ -46,7 +46,8 @@ const directionValues = {
 const EditRecipes = ({ editRecipeModal, setEditRecipeModal, setPage }) => {
   const [values, setValues] = useState(initialRecipeValues);
   const [ingredVal, setIngredVal] = useState(ingredientValues);
-  const { recipes, cooks, state, setState, loading } = useRecipesContext();
+  const { recipes, cooks, state, setState, loading, getRecipesData } =
+    useRecipesContext();
   const [direction, setDirection] = useState("");
   const [openPhotoWidget, setOpenPhotoWidget] = useState(false);
   const [uploadPhoto, setUploadPhoto] = useState({ photo: "" });
@@ -122,6 +123,7 @@ const EditRecipes = ({ editRecipeModal, setEditRecipeModal, setPage }) => {
         console.log(result);
       })
       .catch(console.log);
+    getRecipesData();
     setEditRecipeModal(false);
     setPage("home");
   };
@@ -164,6 +166,7 @@ const EditRecipes = ({ editRecipeModal, setEditRecipeModal, setPage }) => {
           </Grid>
           <Grid item xs={2}>
             <Button
+              autoFocus
               onClick={() => widgetRef.current.open()}
               variant="contained"
             >
@@ -179,7 +182,6 @@ const EditRecipes = ({ editRecipeModal, setEditRecipeModal, setPage }) => {
               fullWidth
               label="Short Description"
               autoComplete="recipe"
-              autoFocus
               name="description"
               value={values.description}
               onChange={handleChange}
@@ -192,7 +194,6 @@ const EditRecipes = ({ editRecipeModal, setEditRecipeModal, setPage }) => {
               fullWidth
               label="Recipe Name"
               autoComplete="recipe"
-              autoFocus
               name="recipe_name"
               value={values.recipe_name}
               onChange={handleChange}

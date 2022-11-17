@@ -15,6 +15,7 @@ import StarBorderPurple500Icon from "@mui/icons-material/StarBorderPurple500";
 import ChatBubbleOutlineIcon from "@mui/icons-material/ChatBubbleOutline";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import CommentIcon from "@mui/icons-material/Comment";
+import { useRecipesContext } from "../context.jsx";
 
 const sideBarElements = [
   { text: "Favorites", icon: <StarBorderPurple500Icon /> },
@@ -29,6 +30,8 @@ export default function Sidebar({
   setEditRecipeModal,
   setPage,
 }) {
+  const { loading, recipes } = useRecipesContext();
+
   const handleMenuClick = (event) => {
     const menuVal = event.currentTarget.getAttribute("value");
     if (menuVal === "Add Recipe") {
@@ -68,13 +71,20 @@ export default function Sidebar({
           ))}
         </List>
         <Divider />
+
         <List>
-          <ListItem>
-            <ListItemButton>
-              <ListItemText>List Recipes Here</ListItemText>
-            </ListItemButton>
-          </ListItem>
+          {!loading &&
+            recipes.map((recipe, index) => {
+              return (
+                <ListItem key={index}>
+                  <ListItemButton>
+                    <ListItemText>{recipe.recipe_name}</ListItemText>
+                  </ListItemButton>
+                </ListItem>
+              );
+            })}
         </List>
+        <Divider />
       </Drawer>
     </Box>
   );
