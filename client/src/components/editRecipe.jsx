@@ -20,6 +20,7 @@ import { CLOUD_NAME, UPLOAD_PRESET } from "../../../config";
 const initialRecipeValues = {
   recipe_name: "",
   cook_name: "",
+  description: "",
   ingredients: [],
   directions: [],
   comments: [
@@ -165,6 +166,21 @@ const EditRecipes = ({ editRecipeModal, setEditRecipeModal }) => {
             >
               Add Photo
             </Button>
+          </Grid>
+          <Grid item xs={12}>
+            <TextField
+              id="outlined-multiline-flexible"
+              margin="normal"
+              multiline
+              maxRows={4}
+              fullWidth
+              label="Short Description"
+              autoComplete="recipe"
+              autoFocus
+              name="description"
+              value={values.description}
+              onChange={handleChange}
+            ></TextField>
           </Grid>
           <Grid item xs={6}>
             <TextField
