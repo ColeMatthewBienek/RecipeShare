@@ -45,8 +45,6 @@ export function Context({ children }) {
     loading,
   };
 
-  console.log("in values:", values.state);
-
   return (
     <RecipesContext.Provider value={values}>{children}</RecipesContext.Provider>
   );

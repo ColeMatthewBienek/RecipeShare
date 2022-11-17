@@ -18,6 +18,7 @@ const Home = ({
   setRecipeId,
 }) => {
   const { loading, cooks, recipes, state } = useRecipesContext();
+
   return (
     <div style={{ marginTop: "100px", maxWidth: "800px", marginLeft: "125px" }}>
       <Grid container spacing={2}>
@@ -38,13 +39,13 @@ const Home = ({
             {!loading &&
               recipes.map((recipe, index) => {
                 return (
-                  <Grid item xs={12}>
+                  <Grid key={index} item xs={12}>
                     <RecipeCard
-                      key={index}
                       recipe_id={recipe._id}
                       name={recipe.recipe_name}
                       photo={recipe.photos[0]}
                       cookName={recipe.cook_name}
+                      comment={recipe.comments}
                       setPage={setPage}
                       setRecipeId={setRecipeId}
                     />
@@ -62,9 +63,8 @@ const Home = ({
             {!loading &&
               cooks.map((cook, index) => {
                 return (
-                  <Grid item md={12}>
+                  <Grid key={index} item md={12}>
                     <CookCard
-                      key={index}
                       name={cook.cookName}
                       location={cook.location}
                       foodTypes={cook.foodTypes}
