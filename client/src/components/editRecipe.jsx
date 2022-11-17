@@ -122,6 +122,8 @@ const EditRecipes = ({ editRecipeModal, setEditRecipeModal, setPage }) => {
         console.log(result);
       })
       .catch(console.log);
+    setEditRecipeModal(false);
+    setPage("home");
   };
 
   const style = {

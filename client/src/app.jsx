@@ -11,6 +11,7 @@ import { ThemeProvider, createTheme } from "@mui/material/styles";
 import { useRecipesContext } from "./context.jsx";
 import Home from "./components/home.jsx";
 import EditRecipes from "./components/editRecipe.jsx";
+import RecipeExpanded from "./components/recipeExpanded";
 
 const darkTheme = createTheme({
   palette: {
@@ -22,6 +23,7 @@ const App = () => {
   const { loading, cooks, recipes, state } = useRecipesContext();
   const [editRecipeModal, setEditRecipeModal] = useState(false);
   const [page, setPage] = useState("home");
+  const [recipeId, setRecipeId] = useState("");
 
   const [light, setLight] = useState(true);
   return (
@@ -40,7 +42,11 @@ const App = () => {
           editRecipeModal={editRecipeModal}
           setEditRecipeModal={setEditRecipeModal}
           setPage={setPage}
+          setRecipeId={setRecipeId}
         />
+      )}
+      {page === "recipeExpanded" && (
+        <RecipeExpanded setPage={setPage} recipeId={recipeId} />
       )}
     </ThemeProvider>
   );
