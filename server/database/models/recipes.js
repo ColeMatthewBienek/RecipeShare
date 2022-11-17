@@ -16,10 +16,11 @@ const CookModel = mongoose.model("Cook", cookSchema);
 const recipeSchema = new Schema({
   recipe_name: { type: String, required: true, unique: true },
   cook_name: { type: String, required: true },
+  description: String,
   ingredients: [
     {
       ingredient: String,
-      amount: Number,
+      amount: String,
       measure: String,
     },
   ],

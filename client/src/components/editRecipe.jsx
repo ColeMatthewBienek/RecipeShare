@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
+import axios from "axios";
 import Box from "@mui/material/Box";
 import FilledInput from "@mui/material/FilledInput";
 import FormControl from "@mui/material/FormControl";
@@ -19,6 +20,7 @@ import { CLOUD_NAME, UPLOAD_PRESET } from "../../../config";
 const initialRecipeValues = {
   recipe_name: "",
   cook_name: "",
+  description: "",
   ingredients: [],
   directions: [],
   comments: [
@@ -33,7 +35,7 @@ const initialRecipeValues = {
 
 const ingredientValues = {
   ingredient: "",
-  amount: 0,
+  amount: "",
   measure: "",
 };
 
@@ -41,10 +43,11 @@ const directionValues = {
   item: [],
 };
 
-const EditRecipes = ({ editRecipeModal, setEditRecipeModal }) => {
+const EditRecipes = ({ editRecipeModal, setEditRecipeModal, setPage }) => {
   const [values, setValues] = useState(initialRecipeValues);
   const [ingredVal, setIngredVal] = useState(ingredientValues);
-  const { recipes, cooks, state, setState, loading } = useRecipesContext();
+  const { recipes, cooks, state, setState, loading, getRecipesData } =
+    useRecipesContext();
   const [direction, setDirection] = useState("");
   const [openPhotoWidget, setOpenPhotoWidget] = useState(false);
   const [uploadPhoto, setUploadPhoto] = useState({ photo: "" });
@@ -74,6 +77,7 @@ const EditRecipes = ({ editRecipeModal, setEditRecipeModal }) => {
 
   const handleClose = () => {
     setEditRecipeModal(false);
+    setPage("home");
   };
   const handleChange = (event) => {
     const elementName = event.target.name;
@@ -109,12 +113,20 @@ const EditRecipes = ({ editRecipeModal, setEditRecipeModal }) => {
     });
     setDirection("");
   };
-  const handleSubmit = (event) => {
+  const handleRecipeSubmit = (event) => {
     event.preventDefault();
-    console.log(formState);
+    const queryData = values;
+    console.log("values----->", values);
+    axios
+      .post("/recipe", queryData)
+      .then((result) => {
+        console.log(result);
+      })
+      .catch(console.log);
+    getRecipesData();
+    setEditRecipeModal(false);
+    setPage("home");
   };
-
-  const handleAddPhoto = () => {};
 
   const style = {
     position: "absolute",
@@ -142,6 +154,39 @@ const EditRecipes = ({ editRecipeModal, setEditRecipeModal }) => {
           <Grid item xs={12}>
             <Typography>Add Recipe</Typography>
           </Grid>
+          <Grid item xs={10}>
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              label="your photo url will appear here ..."
+              value={values.photos}
+              name="photos"
+            ></TextField>
+          </Grid>
+          <Grid item xs={2}>
+            <Button
+              autoFocus
+              onClick={() => widgetRef.current.open()}
+              variant="contained"
+            >
+              Add Photo
+            </Button>
+          </Grid>
+          <Grid item xs={12}>
+            <TextField
+              id="outlined-multiline-flexible"
+              margin="normal"
+              multiline
+              maxRows={4}
+              fullWidth
+              label="Short Description"
+              autoComplete="recipe"
+              name="description"
+              value={values.description}
+              onChange={handleChange}
+            ></TextField>
+          </Grid>
           <Grid item xs={6}>
             <TextField
               margin="normal"
@@ -149,7 +194,6 @@ const EditRecipes = ({ editRecipeModal, setEditRecipeModal }) => {
               fullWidth
               label="Recipe Name"
               autoComplete="recipe"
-              autoFocus
               name="recipe_name"
               value={values.recipe_name}
               onChange={handleChange}
@@ -221,22 +265,9 @@ const EditRecipes = ({ editRecipeModal, setEditRecipeModal }) => {
               Add
             </Button>
           </Grid>
-          <Grid item xs={10}>
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              label="direction"
-              value={values.photos}
-              name="photos"
-            ></TextField>
-          </Grid>
-          <Grid item xs={2}>
-            <Button
-              onClick={() => widgetRef.current.open()}
-              variant="contained"
-            >
-              Add Photo
+          <Grid item xs={12}>
+            <Button variant="contained" onClick={handleRecipeSubmit}>
+              Submit Recipe
             </Button>
           </Grid>
         </Grid>

@@ -24,7 +24,6 @@ export function Context({ children }) {
         };
 
         setState(tempState);
-        console.log("state inside async-------------->", state);
 
         setLoading(false);
       } catch (err) {

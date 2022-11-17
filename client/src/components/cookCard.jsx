@@ -16,7 +16,7 @@ import Chip from "@mui/material/Chip";
 
 export default function CookCard({ name, location, foodTypes, photo }) {
   return (
-    <Card sx={{ maxWidth: 345 }}>
+    <Card sx={{ minWidth: 240 }}>
       <CardMedia
         component="img"
         height="140"
@@ -32,10 +32,16 @@ export default function CookCard({ name, location, foodTypes, photo }) {
           {location}
         </Typography>
         <Typography>Likes to cook...</Typography>
+        <br />
         <Grid container spacing={1}>
           {foodTypes.map((food, index) => (
-            <Grid item xs={6} key={index}>
-              <Chip label={food} variant="outlined" />
+            <Grid item xs={4} key={index}>
+              <Chip
+                sx={{ fontSize: "6pt" }}
+                size="small"
+                label={food}
+                variant="outlined"
+              />
             </Grid>
           ))}
         </Grid>
